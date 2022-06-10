@@ -1,19 +1,18 @@
 const express = require('express');
 const hbs = require('express-handlebars');
+const router = require('./routes');
 
 const port = 5000;
 const app = express();
 
-app.use('/static', express.static('public'));
+app.use('/static', express.static('./src/public'));
 
 app.engine('hbs', hbs.engine({
     extname: 'hbs'
 }));
 app.set('view engine', 'hbs');
-app.set('vies', './views');
+app.set('views', './src/views');
 
-app.get('/', (req, res) => {
-    res.send("Hello");
-});
+app.use(router);
 
 app.listen(port, () => console.log(`Server is listening on port ${port}`));
