@@ -26,5 +26,12 @@
         "difficulty": 3,
         "description": "Megaminx description",
         "id": 3
+    },
+    {
+        "name": "Awesome cube",
+        "description": "Really awesome cube",
+        "imgURL": "https://media.wired.com/photos/5a7e7cb6a2d3835392e1b502/125:94/w_625,h_470,c_limit/new_rubiks_cube_5.jpg",
+        "difficulty": "5",
+        "id": 4
     }
 ]

@@ -6,6 +6,7 @@ const port = 5000;
 const app = express();
 
 app.use('/static', express.static('./src/public'));
+app.use(express.urlencoded({extended: false}));
 
 app.engine('hbs', hbs.engine({
     extname: 'hbs'
