@@ -1,9 +1,10 @@
-const { append } = require('express/lib/response');
-
 const router = require('express').Router();
+const fs = require('fs');
+
+let cubes = require('./cubesDB.json');
 
 router.get('/', (req, res) => {
-    res.render('index');
+    res.render('index', { cubes });
 });
 
 router.get('/about', (req, res) => {
