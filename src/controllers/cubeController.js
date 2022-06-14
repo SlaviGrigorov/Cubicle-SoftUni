@@ -1,30 +1,30 @@
 const router = require('express').Router();
-const fs = require('fs');
 
-let cubes = require('../cubesDB.json');
+const cubeService = require('../services/cubeService');
 
 router.get('/create', (req, res) => {
     res.render('create');
 });
 
-router.post('/create', (req, res) => {
+router.post('/create', async (req, res) => {
     let cube = req.body;
     
     // Check for empty fields in form data
     if (cube.name === "" || cube.imageURL === "" || cube.difficulty === "") {
-        return res.send("Please fill all fields!");
+        return res.status(400).send("Please fill all fields!");
     };
 
     // Save data into JSON
-    cube.id = cubes[cubes.length - 1].id + 1;
-    cubes.push(cube);
-    let data = JSON.stringify(cubes, "", 4);
-    fs.writeFile('./src/cubesDB.json', data, (err) => err? res.status(400): res.redirect('/'));
+    try {
+        await cubeService.save(cube);
+        res.redirect('/');
+    } catch (error) {
+        res.status(400).send(error);
+    }
 });
 
 router.get('/details/:id', (req, res) => {
-    let cubeId = req.params.id;
-    let cube = cubes.find(cube => cube.id == cubeId);
+    let cube = cubeService.getOne(req.params.id);
     res.render('details', { cube });
 });
 
