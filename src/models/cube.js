@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const cubeSchema = new mongoose.Schema({
-    _id: mongoose.Types.ObjectId,
     name:{
         type: String,
         required: true,
@@ -11,7 +10,7 @@ const cubeSchema = new mongoose.Schema({
         required: true,
         maxlength: 100,
     },
-    imgUrl: {
+    imgURL: {
         type: String,
         required: true,
     },
@@ -24,8 +23,8 @@ const cubeSchema = new mongoose.Schema({
 
 });
 
-cubeSchema.path('imgUrl').validate(function() {
-    return this.imgUrl.startsWith('http');
+cubeSchema.path('imgURL').validate(function() {
+    return this.imgURL.startsWith('http');
 }, "Invalid url.");
 
 const Cube = mongoose.model('Cube', cubeSchema);
