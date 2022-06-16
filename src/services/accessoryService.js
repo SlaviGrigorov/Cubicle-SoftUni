@@ -2,5 +2,5 @@ const Accessory = require('../models/accessory');
 
 exports.create = (accessory) => Accessory.create(accessory);
 
-exports.getAll = () => Accessory.find().lean();
+exports.getAll = () => Accessory.find();
 
