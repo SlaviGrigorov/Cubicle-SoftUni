@@ -1,5 +1,3 @@
-const fs = require('fs');
-
 const Cube = require('../models/cube');
 
 exports.getOne = (cubeId) => Cube.findById(cubeId);
