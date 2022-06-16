@@ -1,7 +1,8 @@
 const Cube = require('../models/cube');
 const Accessory = require('../models/accessory');
 
-exports.getOne = (cubeId) => Cube.findById(cubeId).populate('accessories');
+exports.getOne = (cubeId) => Cube.findById(cubeId);
+exports.getOneWithAccessories = (cubeId) => Cube.findById(cubeId).populate('accessories');
 
 exports.getAll = (search, from, to) => {
     let cubes = Cube.find().lean();
