@@ -42,7 +42,7 @@ router.post('/attach-accessory/:id', async (req, res) => {
 
     await cubeService.attachAccessory(cubeId, accessoryId);
 
-    res.redirect(`/cube/details/${cubeId}`)
+    res.redirect(`/cube/details/${cubeId}`);
     console.log(accessoryId);
 });
 
