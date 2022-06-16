@@ -4,15 +4,19 @@ const Accessory = require('../models/accessory');
 exports.getOne = (cubeId) => Cube.findById(cubeId);
 exports.getOneWithAccessories = (cubeId) => Cube.findById(cubeId).populate('accessories');
 
-exports.getAll = (search, from, to) => {
-    let cubes = Cube.find().lean();
+exports.getAll = async (search, from, to) => {
+    search = search? search.toLowerCase() : "";
+    from = Number(from) || 0;
+    to = Number(to) || 6;
+
+    //MongoDB + Mongoose filter
+    let cubes = await Cube.find({name: {$regex: new RegExp(search, 'i')}})
+        .where('difficulty').lte(to).gte(from)
+        .lean()
     return cubes;
 
-    // JSON DB...
-    // search = search? search.toLowerCase() : "";
-    // from = Number(from) || 0;
-    // to = Number(to) || 6;
-
+    //  Service filter
+    // let cubes = await Cube.find().lean();
     // let result = cubes.filter(cube => cube.name.toLowerCase().includes(search)).filter(cube => cube.difficulty >= from && cube.difficulty <= to);
     // return result;
 }
