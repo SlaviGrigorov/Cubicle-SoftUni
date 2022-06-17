@@ -1,5 +1,6 @@
 const express = require('express');
 const hbs = require('express-handlebars');
+const cookieParser = require('cookie-parser');
 const router = require('./routes');
 const { initializeDatabase } = require('./config/database');
 
@@ -15,6 +16,7 @@ app.engine('hbs', hbs.engine({
 app.set('view engine', 'hbs');
 app.set('views', './src/views');
 
+app.use(cookieParser());
 app.use(router);
 
 initializeDatabase()

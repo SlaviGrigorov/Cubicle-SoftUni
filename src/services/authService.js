@@ -30,11 +30,11 @@ exports.login = async (username, password) => {
 
         // Second way to return token as promise
         let jwtPromisify = promisify(jwt.sign);
-        let result = jwtPromisify({_id: user._id, username: user.username}, secret);
+        let result = jwtPromisify({_id: user._id, username: user.username}, secret,{ expiresIn: '2d' });
 
         // Initial way to return token as promise
         // let result = new Promise((resolve, reject) => {
-        //     jwt.sign({_id: user._id, username: user.username}, secret, (err, token) => {
+        //     jwt.sign({_id: user._id, username: user.username}, secret, { expiresIn: '2d' }, (err, token) => {
         //         if (err) {
         //             return reject(err);
         //         }
