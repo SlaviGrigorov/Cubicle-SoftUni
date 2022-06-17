@@ -22,6 +22,7 @@ exports.getAll = async (search, from, to) => {
 }
 
 exports.create = (cube) => Cube.create(cube);
+exports.edit = (cubeId, cubeData) => Cube.findByIdAndUpdate(cubeId, cubeData);
 
 exports.attachAccessory = async (cubeId, accessoryId) => {
     let cube = await Cube.findById(cubeId);
