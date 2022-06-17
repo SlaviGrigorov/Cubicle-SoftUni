@@ -16,9 +16,18 @@ router.post('/register', async (req, res) => {
     }
 });
 
-
 router.get('/login', (req, res) => {
     res.render('login');
+});
+
+router.post('/login', async (req, res) => {
+    const {username, password} = req.body;
+    const successfulLogin = await authService.login(username, password);
+    if (successfulLogin) {
+        res.redirect('/');
+    } else {
+        res.status(400).send('User not found or incorrect password');
+    }
 });
 
 module.exports = router;
