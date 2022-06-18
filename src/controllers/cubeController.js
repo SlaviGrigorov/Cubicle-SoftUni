@@ -9,6 +9,7 @@ router.get('/create', (req, res) => {
 
 router.post('/create', async (req, res) => {
     let cube = req.body;
+    cube.owner = req.user._id;
     
     // Check for empty fields in form data
     if (cube.name === "" || cube.imageURL === "" || cube.difficulty === "") {
