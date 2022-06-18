@@ -18,6 +18,17 @@ app.engine('hbs', hbs.engine({
 app.set('view engine', 'hbs');
 app.set('views', './src/views');
 
+let hbsHelper = hbs.create({});
+
+hbsHelper.handlebars.registerHelper('select', function (difficulty, options){
+    let pattern = 'value="' + difficulty + '"';
+    let regex = new RegExp(pattern);
+
+    return options.fn(this)
+        .split('\n')
+        .map( opt => regex.test(opt) ? opt.replace(pattern, pattern + " selected") : opt );
+});
+
 app.use(cookieParser());
 app.use(auth);
 app.use(router);

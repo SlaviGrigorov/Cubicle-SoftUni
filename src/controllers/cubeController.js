@@ -31,7 +31,6 @@ router.get('/details/:id', async (req, res) => {
     if (req.user) {
         isOwner = cube.owner == req.user._id;
     }
-    console.log(isOwner);
     res.render('details', { cube, isOwner });
 });
 
