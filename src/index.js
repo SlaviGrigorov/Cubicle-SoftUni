@@ -4,6 +4,8 @@ const cookieParser = require('cookie-parser');
 const router = require('./routes');
 const { initializeDatabase } = require('./config/database');
 
+const { auth } = require('./middlewares/authMiddleware');
+
 const port = 5000;
 const app = express();
 
@@ -17,6 +19,7 @@ app.set('view engine', 'hbs');
 app.set('views', './src/views');
 
 app.use(cookieParser());
+app.use(auth);
 app.use(router);
 
 initializeDatabase()
