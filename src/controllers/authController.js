@@ -13,8 +13,7 @@ router.post('/register', async (req, res) => {
         await authService.register(req.body);
         res.redirect('/auth/login');
     } catch (error) {
-        let errors = errorHandler(error);
-        res.status(401).render('register', { error: errors });
+        res.status(401).render('register', { error: errorHandler(error) });
     }
     
     // let createdUser = await authService.register(req.body);
@@ -37,7 +36,7 @@ router.post('/login', async (req, res) => {
         res.cookie(sessionName, token, { httpOnly: true });
         res.redirect('/');
     } else {
-        res.status(400).send('User not found or incorrect password');
+        res.status(400).render('login',{error: errorHandler('User not found or incorrect password')});
     }
 });
 

@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
         minlength: [5, 'Username must be at least 5 characters long'],
         validate: {
             validator: function(v) {
-                const regEx = new RegExp('^[a-zA-Z0-9]')
+                const regEx = new RegExp('^[a-zA-Z0-9]*$')
                 return regEx.test(v);
             },
             message:`Only letters and numbers are allowed for username!`
@@ -19,10 +19,10 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: [true, 'Password is required'],
-        minlength: [1, 'Password should contain atleast 8 characters'],
+        minlength: [8, 'Password should contain atleast 8 characters'],
         validate: {
             validator: function(v) {
-                const regEx = new RegExp('^[a-zA-Z0-9]')
+                const regEx = new RegExp('^[a-zA-Z0-9]*$')
                 return regEx.test(v);
             },
             message:`Only letters and numbers are allowed for password!`
